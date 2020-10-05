@@ -23,6 +23,7 @@ public class Product implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String name;
 	@Column(columnDefinition = "TEXT")
 	private String description;
@@ -40,6 +41,7 @@ public class Product implements Serializable {
 	Set<Category> categories = new HashSet<>();
 
 	public Product() {
+		
 	}
 
 	public Product(Long id, String name, String description, Double price, String imgUrl, Instant date) {

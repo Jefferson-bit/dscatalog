@@ -23,14 +23,15 @@ import com.crash.dscatalog.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class ProductService {
-
+	
+	
+	
 	@Autowired
 	private ProductRepository productRepository;
 
 	@Autowired
 	private CategoryRepository categoryRepository;
 
-	
 	@Transactional(readOnly = true)
 	public Page<ProductDTO> findAllPaged(PageRequest pageRequest) {
 		Page<Product> list = productRepository.findAll(pageRequest);
@@ -64,6 +65,7 @@ public class ProductService {
 		}
 	}
 
+	@Transactional
 	public void delete(Long id) {
 		try {
 			productRepository.deleteById(id);
@@ -73,7 +75,7 @@ public class ProductService {
 			throw new DataBaseException("Integrity violation");
 		}
 	}
-	
+
 	private void copyDtoToEntity(ProductDTO dto, Product entity) {
 		entity.setName(dto.getName());
 		entity.setDescription(dto.getDescription());
@@ -81,7 +83,7 @@ public class ProductService {
 		entity.setImgUrl(dto.getImgUrl());
 		entity.setPrice(dto.getPrice());
 		entity.getCategories().clear();
-		for(CategoryDTO catDto: dto.getCategories()) {
+		for (CategoryDTO catDto : dto.getCategories()) {
 			Category category = categoryRepository.getOne(catDto.getId());
 			entity.getCategories().add(category);
 		}
