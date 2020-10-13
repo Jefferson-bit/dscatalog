@@ -2,6 +2,7 @@
     margin-top: 26px;
     padding-left: 40px;
     padding-right: 40px;
+    margin-bottom: 30px;
 }
 
 .catalog-title{
@@ -11,7 +12,7 @@
 }
 
 .catalog-products {
-    margin-top: 43px;
+    margin-top: 30px;
     display: grid;
     grid-template-columns: repeat(auto-fill, 250px);
     grid-gap: 33px 25px;
