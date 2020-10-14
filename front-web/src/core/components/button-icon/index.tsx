@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles.scss';
-import { ReactComponent as SetaIcon } from '../../assets/images/Seta.svg';
+import { ReactComponent as SetaIcon } from 'core/assets/images/Seta.svg';
 
 type Props = {
     text?: string;
