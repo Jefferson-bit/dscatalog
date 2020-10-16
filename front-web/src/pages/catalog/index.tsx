@@ -5,15 +5,17 @@ import { makeRequest } from 'core/utils/request';
 import ProductCardLoader from './components/Loader/ProductCardLoader';
 import ProductCard from './components/product-card';
 import './styles.scss';
+import Pagination from 'core/components/pagination';
 
 
 const Catalog = () => {
     const [productsResponse, setProductsResponse] = useState<ProductResponse>();
     const [isLoading, setIsLoading] = useState(false);
+    const [activePage, setActivePage] = useState(0);
 
     useEffect(() => {
         const params = {
-            page: 0,
+            page: activePage,
             linesPerPage: 12
         }
         setIsLoading(true)
@@ -22,7 +24,7 @@ const Catalog = () => {
             .finally(() => {
                 setIsLoading(false)
             })
-    }, []);
+    }, [activePage]);
 
     return (
         <div className="clataog-container">
@@ -38,6 +40,13 @@ const Catalog = () => {
                     ))
                 )}
             </div>
+            {productsResponse && (
+            <Pagination
+            totalPages={productsResponse?.totalPages} 
+            activePage={activePage}
+            onChange={page => setActivePage(page)}
+            />
+            )}
         </div>
     )
 };
