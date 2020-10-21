@@ -2,38 +2,44 @@ package com.crash.dscatalog.services.validation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.servlet.HandlerMapping;
 
 import com.crash.dscatalog.domains.User;
-import com.crash.dscatalog.dto.UserInsertDTO;
+import com.crash.dscatalog.dto.UserUpdateDTO;
 import com.crash.dscatalog.repositories.UserRepository;
 import com.crash.dscatalog.resources.exceptions.FieldMessage;
 
-public class UserInsertValidator implements ConstraintValidator<UserInsertValid, UserInsertDTO> {
-	
-	@Autowired
+public class UserUpdateValidator implements ConstraintValidator<UserUpdateValid, UserUpdateDTO> {
+
+	@Autowired	
 	private UserRepository userRepository;
-	
+
+	@Autowired
+	private HttpServletRequest request;
+
 	@Override
-	public void initialize(UserInsertValid ann) {
+	public void initialize(UserUpdateValid ann) {
 	}
 
 	@Override
-	public boolean isValid(UserInsertDTO dto, ConstraintValidatorContext context) {
+	public boolean isValid(UserUpdateDTO dto, ConstraintValidatorContext context) {
 		
+		@SuppressWarnings("unchecked")
+		var uriVars = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
+		long userId = Long.parseLong(uriVars.get("id"));
 		List<FieldMessage> list = new ArrayList<>();
 		
-		// Coloque aqui seus testes de validação, acrescentando objetos FieldMessage à lista
-		
 		User user = userRepository.findByEmail(dto.getEmail());
-		if(user != null ) 
+		if(user != null && userId != user.getId()) {
 			list.add(new FieldMessage("Email", "Email existente"));
-		
-		
+		}
 		for (FieldMessage e : list) {
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate(e.getMessage()).addPropertyNode(e.getFieldName())

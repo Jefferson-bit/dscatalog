@@ -18,6 +18,7 @@ import com.crash.dscatalog.domains.User;
 import com.crash.dscatalog.dto.RoleDTO;
 import com.crash.dscatalog.dto.UserDTO;
 import com.crash.dscatalog.dto.UserInsertDTO;
+import com.crash.dscatalog.dto.UserUpdateDTO;
 import com.crash.dscatalog.repositories.RoleRepository;
 import com.crash.dscatalog.repositories.UserRepository;
 import com.crash.dscatalog.services.exceptions.DataBaseException;
@@ -58,7 +59,7 @@ public class UserService {
 	}
 
 	@Transactional
-	public UserDTO update(UserDTO dto, Long id) {
+	public UserDTO update(UserUpdateDTO dto, Long id) {
 		try {
 			User entity = userRepository.getOne(id);
 			copyDtoToEntity(dto, entity);
