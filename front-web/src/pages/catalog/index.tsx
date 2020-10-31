@@ -7,7 +7,6 @@ import ProductCard from './components/product-card';
 import './styles.scss';
 import Pagination from 'core/components/pagination';
 
-
 const Catalog = () => {
     const [productsResponse, setProductsResponse] = useState<ProductResponse>();
     const [isLoading, setIsLoading] = useState(false);
