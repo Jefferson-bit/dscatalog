@@ -1,4 +1,4 @@
-package com.crash.dscatalog.confg;
+ package com.crash.dscatalog.confg;
 
 import java.util.Arrays;
 

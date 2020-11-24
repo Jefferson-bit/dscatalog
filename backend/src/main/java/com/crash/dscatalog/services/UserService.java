@@ -30,7 +30,7 @@ import com.crash.dscatalog.services.exceptions.DataBaseException;
 import com.crash.dscatalog.services.exceptions.ResourceNotFoundException;
 
 @Service
-public class UserService implements UserDetailsService{
+public  class UserService implements UserDetailsService{
 	
 	private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
 	

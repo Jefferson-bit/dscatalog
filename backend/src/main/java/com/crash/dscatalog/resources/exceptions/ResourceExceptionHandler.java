@@ -23,12 +23,14 @@ public class ResourceExceptionHandler {
 		Instant.now(), HttpStatus.NOT_FOUND.value(), e.getMessage(), "Resource Not Found",request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
 	}
+	
 	@ExceptionHandler(DataBaseException.class)
 	public ResponseEntity<StandardError> database(DataBaseException e, HttpServletRequest request){
 		StandardError err = new StandardError(
 		Instant.now(), HttpStatus.BAD_REQUEST.value(), e.getMessage(), "Database Exception",request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
 	}
+	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<ValidationError> validationException(MethodArgumentNotValidException e, HttpServletRequest request){
 		ValidationError err = new ValidationError(
