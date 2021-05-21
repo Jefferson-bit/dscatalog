@@ -26,7 +26,7 @@ import com.crash.dscatalog.services.ProductService;
 @RestController
 @RequestMapping(value = "/products")
 public class ProductResource {
-
+	
 	@Autowired
 	private ProductService productService;
 
@@ -40,7 +40,6 @@ public class ProductResource {
 			@RequestParam(value = "orderBy", defaultValue = "name") String orderBy){
 		 
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		
 		Page<ProductDTO> list = productService.findAllPaged(categoryId, name.trim(), pageRequest);
 		return ResponseEntity.ok().body(list);
 	}
